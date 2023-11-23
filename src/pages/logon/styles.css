@@ -22,3 +22,13 @@ input {
     height: 18px;
     
 }
+
+img{
+width: 250px;
+display: flex;
+}
+
+.logo{
+display: flex;
+justify-content: center;
+}

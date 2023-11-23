@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import Logon from './logon'
+import Routes from './route';
 
 function App() {
 return(
-<Logon/>
+<Routes/>
 )
 }
 
