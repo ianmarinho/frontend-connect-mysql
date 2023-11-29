@@ -14,9 +14,11 @@
 }
 
 .menu {
+   
     width: 20%;
     background-color: #ffff;
     margin: 5px;
+    
 }
 
 .principal {
@@ -39,8 +41,24 @@ td {
     
 }
 
-
-
 .botoes:hover{
     cursor:Pointer;
 }
+
+.btn-novo:hover{
+cursor: pointer;
+background-color: #0056b3;
+}
+
+.btn-novo{
+display: flex;
+width: 10%;
+border-radius: 5px;
+padding: 4px;
+margin-top: 15px;
+margin-bottom: 10px;
+border:solid 0px;
+background-color: #007bff;
+color: #f8f8f8f8;
+text-decoration: none;
+}    
