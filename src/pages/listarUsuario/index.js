@@ -56,7 +56,7 @@ return (
 
         <Head title = "Lista de Usuário" />
 
-            <Link className='btn-novo'>Novo Cadastro</Link>
+            <Link to="/cadastrousuario"  className='btn-novo'>Novo Cadastro</Link>
 
             <table >
                 <tr>
