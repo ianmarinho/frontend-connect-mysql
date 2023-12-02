@@ -31,6 +31,7 @@ export default function Logon() {
                     <a href="#">Novo Cadastro</a>
                 </form>
             </section>
+            
         </div>
     )
 }
