@@ -14,7 +14,7 @@ form {
     margin: auto;
 }
 
-input {
+.input {
     border: 1px solid #dcdce6;
     padding: 3px;
     margin: 3px;

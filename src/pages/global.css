@@ -63,18 +63,32 @@ td {
     text-decoration: none;
 }
 
-form input {
-    margin-top: 8px;
+.form-cadastro input {
+    /* margin-top: 8px;
     margin-bottom: 8px;
     margin-left: 8px;
     margin-right: 8;
     padding: 5px;
-    border: solid 1px #adb9d3;
+    border: solid 1px #adb9d3; */
+
+    width: 100%;
+    height: 30px;
+    color: #333;
+    border: 1px solid #dcdce6;
+    border: 8px;
+    
 }
 
-.form-cadastro{
+.form-cadastro input:focus {
 
- background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 0;
+    border: 1px solid #dcdce6;
+    outline: 0;
+}
+
+.form-cadastro {
+
+    background-color: rgba(255, 255, 255, 0.8);
     /* Fundo com transparência */
 
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -87,7 +101,7 @@ form input {
 
     padding: 20px;
     /* Espaçamento interno para o conteúdo */
-
+   
 }
 
 .form-container {
@@ -114,6 +128,7 @@ form input {
     margin-top: 10px;
     margin-bottom: 5px;
     width: 180px;
+    
 }
 
 .btn-cancel {
@@ -126,5 +141,5 @@ form input {
     margin-top: 10px;
     margin-bottom: 5px;
     width: 180px;
+    
 }
-

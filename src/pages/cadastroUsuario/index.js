@@ -11,7 +11,22 @@ import Head from '../../componentes/menu/Head';
 export default function Cadastrousuario() {
 
     const [nome,setNome] =useState("");
-
+    const [email,setEmail] =useState("");
+    const [senha,setSenha] =useState("");
+   // const usuarios = ["carlos","carlos@gamil.com","123"]
+    const usuario ={
+        nome,
+        email,
+        senha
+    }
+    function salvardados(e){
+        e.preventDefault();
+        //console.log(usuario)
+        const banco = JSON.parse(localStorage.getItem("cd-usuario") || "[]");
+        banco.push(usuario)
+        localStorage.setItem("cd-usuario",JSON.stringify(banco));
+        alert("Usuário salvo com sucesso");
+    }
     return (
         <div className="dashboard-container">
 
@@ -26,10 +41,10 @@ export default function Cadastrousuario() {
 
                 <div class="form-container">
 
-                    <form className='form-cadastro'>
+                    <form className='form-cadastro'onSubmit={salvardados}>
                         <input type="text" value={nome} onChange={e=>setNome(e.target.value)}  placeholder="Digite o nome de usuário" />
-                        <input type="email" placeholder="Digite o email" />
-                        <input type="password" placeholder="Digite a senha" />
+                        <input type="email"  value={email} onChange={e=>setEmail(e.target.value)} placeholder="Digite o email" />
+                        <input type="password" value={senha} onChange={e=>setSenha(e.target.value)} placeholder="Digite a senha" />
 
                         <div class="acao">
                             <button className='btn-save'> Salvar <RiSave3Fill /> </button>
@@ -37,7 +52,7 @@ export default function Cadastrousuario() {
                         </div>
 
                     </form>
-
+                
                 </div>
 
 
