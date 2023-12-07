@@ -13,17 +13,19 @@ export default function Listausuario() {
 
     // jason e apenas o colchete dentro das (chaves array) , suportando variavel e seu valor, assim identificando os itens mais facilmente.
 
-    const dados = [
+    // const dados = [
 
-        { id: 1, nome: "Carlos", email: "carlos@gmail.com", senha: "123" },
+    //     { id: 1, nome: "Carlos", email: "carlos@gmail.com", senha: "123" },
 
-        { id: 2, nome: "Felipe", email: "carlos@gmail.com", senha: "321" },
+    //     { id: 2, nome: "Felipe", email: "carlos@gmail.com", senha: "321" },
 
-        { id: 3, nome: "Nilson", email: "carlos@gmail.com", senha: "321" },
+    //     { id: 3, nome: "Nilson", email: "carlos@gmail.com", senha: "321" },
 
 
 
-    ]
+    // ]
+
+    const banco = JSON.parse(localStorage.getItem("cd-usuario") || "[]");
 
     const apagar = (id) => {
         confirmAlert({
@@ -69,7 +71,7 @@ return (
                 </tr>
 
                 {
-                    dados.map((usu) => {
+                    banco.map((usu) => {
 
                         return (
                             <tr key={usu.toString()}>
