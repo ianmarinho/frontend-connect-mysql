@@ -22,9 +22,10 @@ export default function Cadastrousuario() {
         email,
         senha
     }
+
     function salvardados(e) {
         e.preventDefault();
-        //console.log(usuario);
+        console.log(usuario);
 
         if (nome == "")
             alert("Preencha o campo nome")
@@ -43,6 +44,9 @@ export default function Cadastrousuario() {
             navigate('/listausuario');
         }
     }
+
+
+
 
     return (
         <div className="dashboard-container">

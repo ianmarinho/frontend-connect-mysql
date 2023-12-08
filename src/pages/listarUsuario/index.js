@@ -1,3 +1,5 @@
+import React, { useState,useEffect } from 'react';
+
 import '../../pages/global.css';
 import Menu from '../../componentes/menu'
 import { FiEdit, FiTrash, FiDelete, FiFilePlus } from "react-icons/fi";
@@ -10,6 +12,8 @@ import Head from '../../componentes/menu/Head';
 
 export default function Listausuario() {
 
+    const [dados,setDados] = useState([]);
+    const [banco,setBanco] = useState([]);
 
     // jason e apenas o colchete dentro das (chaves array) , suportando variavel e seu valor, assim identificando os itens mais facilmente.
 
@@ -25,7 +29,14 @@ export default function Listausuario() {
 
     // ]
 
-    const banco = JSON.parse(localStorage.getItem("cd-usuario") || "[]");
+    useEffect ( ()=>{
+    mostrarDados ();
+    },[] )
+
+    function mostrarDados ()
+    {
+        setBanco(JSON.parse(localStorage.getItem("cd-usuario") || "[]"));
+    }
 
     const apagar = (id) => {
         confirmAlert({
@@ -34,7 +45,12 @@ export default function Listausuario() {
             buttons: [
                 {
                     label: 'Sim',
-                    onClick: () => alert (`Você apagou o usuário id: ${id}`)
+                    onClick: () => {
+              
+                        setDados(banco.filter(item=>item.id!=id))
+                        // localStorage.setItem("cd-usuario", JSON.stringify(dados));
+                         alert (`Você apagou o usuário id: ${id}`)
+                        }
                 },
                 {
                     label: 'Não',
