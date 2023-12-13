@@ -1,3 +1,4 @@
+
 import React, { useState,useEffect } from 'react';
 
 import '../../pages/global.css';
@@ -35,30 +36,31 @@ export default function Listausuario() {
 
     function mostrarDados ()
     {
-        setBanco(JSON.parse(localStorage.getItem("cd-usuario") || "[]"));
+        setBanco(JSON.parse(localStorage.getItem("cd-usuarios") || "[]"));
     }
 
-    const apagar = (id) => {
+    const  apagar = (id) => {
         confirmAlert({
-            title: 'Excluir Usuário',
-            message: 'Deseja realmente excluir.',
-            buttons: [
-                {
-                    label: 'Sim',
-                    onClick: () => {
+          title: 'Excluir Usuário',
+          message: 'Deseja realmente excluir esse usuário?',
+          buttons: [
+            {
+              label: 'Sim',
+              onClick: () => {
+                let dadosnovos = banco.filter(item => item.id !== id);
+                localStorage.setItem("cd-usuarios", JSON.stringify(dadosnovos));
+                setBanco(dadosnovos); // Atualiza o estado com os dados filtrados
+                alert(`Você apagou o usuário id:${id}`);
+              }
               
-                        setDados(banco.filter(item=>item.id!=id))
-                        // localStorage.setItem("cd-usuario", JSON.stringify(dados));
-                         alert (`Você apagou o usuário id: ${id}`)
-                        }
-                },
-                {
-                    label: 'Não',
-                    onClick: () => alert('Click No')
-                }
-            ]
+            },
+            {
+              label: 'Não',
+              onClick: () => alert('Click No')
+            }
+          ]
         });
-    };
+      };
 
 return (
     <div className="dashboard-container">
