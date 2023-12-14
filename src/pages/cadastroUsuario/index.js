@@ -37,9 +37,9 @@ export default function Cadastrousuario() {
             alert("Preencha o campo senha")
 
         else {
-            const banco = JSON.parse(localStorage.getItem("cd-usuario") || "[]");
+            const banco = JSON.parse(localStorage.getItem("cd-usuarios") || "[]");
             banco.push(usuario)
-            localStorage.setItem("cd-usuario", JSON.stringify(banco));
+            localStorage.setItem("cd-usuarios", JSON.stringify(banco));
             alert("Usuário salvo com sucesso");
             navigate('/listausuario');
         }

@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import {Link} from 'react-router-dom';
 import Head from '../../componentes/menu/Head';
+import { useNavigate, link } from 'react-router-dom';
 
 
 
@@ -15,6 +16,7 @@ export default function Listausuario() {
 
     const [dados,setDados] = useState([]);
     const [banco,setBanco] = useState([]);
+    const navigate = useNavigate ();
 
     // jason e apenas o colchete dentro das (chaves array) , suportando variavel e seu valor, assim identificando os itens mais facilmente.
 
@@ -96,7 +98,7 @@ return (
                                 <td> {usu.id} </td>
                                 <td> {usu.nome} </td>
                                 <td> {usu.email} </td>
-                                <td className='botoes'> <FiEdit color='blue' />
+                                <td className='botoes'> <link to = {`/editarusuario/${usu.id}`} ></link> <FiEdit color='blue' />
                                 </td>
                                 <td className='botoes'> <FiTrash color='red' onClick={(e)=>apagar(usu.id)}/>
                                 </td>
