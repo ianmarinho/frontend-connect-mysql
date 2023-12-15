@@ -98,7 +98,9 @@ return (
                                 <td> {usu.id} </td>
                                 <td> {usu.nome} </td>
                                 <td> {usu.email} </td>
-                                <td className='botoes'> <link to = {`/editarusuario/${usu.id}`} ></link> <FiEdit color='blue' />
+                                <td className='botoes'> 
+                                <Link to = {`/editarusuario/${usu.id}`} ><FiEdit color='blue' />
+                                </Link> 
                                 </td>
                                 <td className='botoes'> <FiTrash color='red' onClick={(e)=>apagar(usu.id)}/>
                                 </td>
