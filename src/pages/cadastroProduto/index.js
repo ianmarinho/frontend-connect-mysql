@@ -13,35 +13,38 @@ export default function Cadastroproduto() {
     const navigate = useNavigate();
     const [status, setStatus] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [quantidade, setQuantidade] = useState("");
+    const [estoque_minimo, setEstoque_minimo] = useState(0);
+    const [estoque_maximo, setEstoque_maximo] = useState(10);
     // const usuarios = ["carlos","carlos@gamil.com","123"]
 
     const produto = {
         id: Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36),
         status,
         descricao,
-        estoque
+        estoque_minimo,
+        estoque_maximo
     }
 
     function salvardados(e) {
         e.preventDefault();
-        console.log(produto);
-
-        if (status == "")
-            alert("Preencha o campo nome")
-
-        else if (descricao == "")
-            alert("Preencha o campo email")
-
-        else if (estoque == "")
-            alert("Preencha o campo senha")
-
-        else {
+        let i = 0;
+        if (status === "")
+            i++;
+        else if (descricao === "")
+            i++;
+        else if (estoque_minimo === "" || estoque_minimo === 0)
+            i++;
+        else if (estoque_maximo === "" || estoque_maximo === 0)
+            i++;
+        if (i === 0)
+         {
             const banco = JSON.parse(localStorage.getItem("cd-produtos") || "[]");
-            banco.push(produto)
+            banco.push(produto);
             localStorage.setItem("cd-produtos", JSON.stringify(banco));
-            alert("Usuário salvo com sucesso");
+            alert("Produto salvo com sucesso");
             navigate('/listaproduto');
+        } else {
+            alert("Verifique! Há campos vazios!")
         }
     }
 
@@ -63,10 +66,10 @@ export default function Cadastroproduto() {
                 <div class="form-container">
 
                     <form className='form-cadastro' onSubmit={salvardados}>
-                        <input type="produto" value={status} onChange={e => setStatus(e.target.value)} placeholder="Digite o nome do produto" />
-                        <input type="descricao" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder="Descrição do produto" />
-                        <input type="quantidade" value={quantidade} onChange={e => setQuantidade(e.target.value)} placeholder="Digite a quantidade" />
-
+                        <input type="text" value={status} onChange={e => setStatus(e.target.value)} placeholder="Digite o status" />
+                        <input type="text" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder="Digite a descrição" />
+                        <input type="number" value={estoque_minimo} onChange={e => setEstoque_minimo(e.target.value)}  />
+                        <input type="number" value={estoque_maximo} onChange={e => setEstoque_maximo(e.target.value)}  />
                         <div class="acao">
                             <button className='btn-save'> Salvar <RiSave3Fill /> </button>
                             <button className='btn-cancel'> Cancelar <MdOutlineCancel /> </button>
