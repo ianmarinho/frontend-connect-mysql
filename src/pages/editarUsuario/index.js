@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import '../../pages/global.css';
 import Menu from '../../componentes/menu'
-import { FiFilePlus } from "react-icons/fi";
 import { MdCancel } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -31,7 +30,7 @@ export default function Editarusuario() {
   }, [banco])
 
   async function mostrarDados() {
-    setBanco(JSON.parse(localStorage.getItem("cd-usuario") || "[]"));
+    setBanco(JSON.parse(localStorage.getItem("cd-usuarios") || "[]"));
     //let dadosnovos = banco.filter(item => item.id == id);
     banco.map((linha) => {
       if (linha.id === id) {
@@ -50,13 +49,13 @@ export default function Editarusuario() {
     e.preventDefault();
 
     let i = 0;
-    if (nome == "")
+    if (nome === "")
       i++;
-    else if (email == "")
+    else if (email === "")
       i++;
-    else if (senha == "")
+    else if (senha === "")
       i++;
-    if (i == 0) {
+    if (i === 0) {
       const banco = JSON.parse(localStorage.getItem("cd-usuarios") || "[]");
       banco.push(usuario);
       localStorage.setItem("cd-usuarios", JSON.stringify(banco));

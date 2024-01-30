@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 
 import '../../pages/global.css';
 import Menu from '../../componentes/menu'
-import { FiFilePlus } from "react-icons/fi";
 import { RiSave3Fill } from "react-icons/ri";
-import { MdOutlineCancel, MdPadding } from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import Head from '../../componentes/menu/Head';
 
