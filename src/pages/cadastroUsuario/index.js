@@ -16,12 +16,12 @@ export default function Cadastrousuario() {
     const [senha, setSenha] = useState("");
     // const usuarios = ["carlos","carlos@gamil.com","123"]
 
-    // const usuario = {
-    //     id: Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36),
-    //     nome,
-    //     email,
-    //     senha
-    // }
+    const usuario = {
+        id: Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36),
+        nome,
+        email,
+        senha
+    }
 ''
     function salvardados(e) {
         e.preventDefault();
