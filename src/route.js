@@ -4,6 +4,7 @@ import Dashboard from './pages/dashboard';
 import Listausuario from './pages/listarUsuario';
 import Cadastrousuario from './pages/cadastroUsuario';
 import Editarusuario from './pages/editarUsuario';
+import Editarproduto from './pages/editarProduto';
 import Cadastroproduto from './pages/cadastroProduto';
 import Listaproduto from './pages/listarProduto';
 
@@ -18,6 +19,7 @@ export default function Rotas(){
                 <Route path="/cadastrousuario" element={<Cadastrousuario/>} />
                 <Route path="/cadastroproduto" element={<Cadastroproduto/>} />
                 <Route path="/editarusuario/:id" element={<Editarusuario/>} />
+                <Route path="/editarproduto/:id" element={<Editarproduto/>} />
                
                 
             </Routes>

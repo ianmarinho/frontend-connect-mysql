@@ -1,5 +1,5 @@
 import './styles.css'
-import Menu from '../../componentes/menu'
+import Menu from '../../componentes/Menu';
 
 
 

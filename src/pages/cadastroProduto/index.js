@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import '../../pages/global.css';
-import Menu from '../../componentes/menu'
+import Menu from '../../componentes/Menu';
 import { RiSave3Fill } from "react-icons/ri";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-import Head from '../../componentes/menu/Head';
+import Head from '../../componentes/Head';
 
 export default function Cadastroproduto() {
 
