@@ -84,14 +84,10 @@ return (
                         return (
                             <tr key={ent.toString()}>
                                 <td> {ent.id} </td>
-                                <td> {ent.idpro} </td>
-                                <td> {ent.descricao} </td>
-                                <td> {ent.estoque_minimo} </td>
-                                <td> {ent.estoque_maximo} </td>
-                                <td className='botoes'> 
-                                <Link to = {`/editarproduto/${ent.id}`} ><FiEdit color='blue' />
-                                </Link> 
-                                </td>
+                                <td> {ent.idproduto} </td>
+                                <td> {ent.quantidade} </td>
+                                <td> {ent.valorunitario} </td>
+                                <td> {ent.dataentrada} </td>
                                 <td className='botoes'> <FiTrash color='red' onClick={(e)=>apagar(ent.id)}/>
                                 </td>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../../pages/global.css';
 import Menu from '../../componentes/Menu';
@@ -15,6 +15,7 @@ export default function Cadentradaproduto() {
     const [quantidade, setQuantidade] = useState("");
     const [valorunitario, setValorUnitario] = useState("");
     const [dataentrada, setDataentrada] = useState("");
+    const [produtos, setProdutos] = useState([]);
     // const usuarios = ["carlos","carlos@gamil.com","123"]
 
     const cadentradaproduto = {
@@ -50,6 +51,14 @@ export default function Cadentradaproduto() {
         }
     }
 
+    useEffect(()=>{
+        buscarprodutos();
+    },[])
+     
+    function buscarprodutos(){
+        setProdutos(JSON.parse(localStorage.getItem("cd-produtos") || "[]"));
+    }
+
     return (
         <div className="dashboard-container">
 
@@ -65,7 +74,21 @@ export default function Cadentradaproduto() {
                 <div class="form-container">
 
                     <form className='form-cadastro' onSubmit={salvardados}>
+
                         <input type="text" value={idproduto} onChange={e => setIdproduto(e.target.value)} placeholder="Digite a entrada" />
+
+                        <select value={idproduto} onChange={e => setIdproduto(e.target.value)} >
+                            <option value>Produtos</option>
+                            {
+                                produtos.map((linha) => {
+                                    return (
+                                        <option value={linha.id}>{linha.descricao}</option>
+                                    )
+                                })
+                            }
+
+                        </select>
+
                         <input type="number" value={quantidade} onChange={e => setQuantidade(e.target.value)} placeholder="Digite a quantidade" />
                         <input type="number" value={valorunitario} onChange={e => setValorUnitario(e.target.value)} placeholder="Digite o valor da unidade" />
                         <input type="date" value={dataentrada} onChange={e => setDataentrada(e.target.value)} placeholder="Digite a data da entrada" />
