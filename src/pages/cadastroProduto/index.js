@@ -17,7 +17,7 @@ export default function Cadastroproduto() {
     // const usuarios = ["carlos","carlos@gamil.com","123"]
 
     const produto = {
-        id: Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36),
+        id: Date.now().toString(10) + Math.floor(Math.random() * 100 + 50).toString(4),
         status,
         descricao,
         estoque_minimo,

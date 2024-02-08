@@ -6,7 +6,7 @@ import Menu from '../../componentes/Menu'
 import { FiEdit, FiTrash, FiDelete, FiFilePlus } from "react-icons/fi";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import {Link} from 'react-router-dom';
+import {json, Link} from 'react-router-dom';
 import Head from '../../componentes/Head';
 import { useNavigate, link } from 'react-router-dom';
 
@@ -25,6 +25,21 @@ export default function Entradaproduto() {
     function mostrarDados ()
     {
         setBanco(JSON.parse(localStorage.getItem("cd-cadentradaproduto") || "[]"));
+    }
+
+    function mostrarnome (idproduto){
+    let nome = "";
+    const Listaproduto = JSON.parse(localStorage.getItem ("cd-produtos") || "[]" );
+
+    Listaproduto.
+    filter ( value => value.id == idproduto).
+    map (value => {
+    
+        nome = value.descricao
+    }) 
+
+
+    return nome;
     }
 
     const  apagar = (id) => {
@@ -69,7 +84,7 @@ return (
             <table >
                 <tr>
                     <th>Id</th>
-                    <th>Status</th>
+                    <th>Id Produto</th>
                     <th>Quantidade</th>
                     <th>Valor Unitário</th>
                     <th>Data de Entrada</th>
@@ -84,7 +99,7 @@ return (
                         return (
                             <tr key={ent.toString()}>
                                 <td> {ent.id} </td>
-                                <td> {ent.idproduto} </td>
+                                <td> { (mostrarnome) (ent.idproduto)} </td>
                                 <td> {ent.quantidade} </td>
                                 <td> {ent.valorunitario} </td>
                                 <td> {ent.dataentrada} </td>

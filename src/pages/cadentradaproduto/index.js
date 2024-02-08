@@ -16,6 +16,7 @@ export default function Cadentradaproduto() {
     const [valorunitario, setValorUnitario] = useState("");
     const [dataentrada, setDataentrada] = useState("");
     const [produtos, setProdutos] = useState([]);
+
     // const usuarios = ["carlos","carlos@gamil.com","123"]
 
     const cadentradaproduto = {
@@ -25,6 +26,14 @@ export default function Cadentradaproduto() {
         valorunitario,
         dataentrada
     }
+    const dadosestoque = {
+        id: Date.now().toString(5) + Math.floor(Math.pow(1, 5) + Math.random() * 9 * Math.pow(1, 5)).toString(5),
+        idproduto,
+        quantidade,
+        valorunitario,
+    }
+
+    
 
     function salvardados(e) {
         e.preventDefault();
@@ -43,13 +52,21 @@ export default function Cadentradaproduto() {
             alert("Preencha com a data da entrada")
 
         else {
+            const estoque = JSON.parse(localStorage.getItem("cd-estoques") || "[]");
             const banco = JSON.parse(localStorage.getItem("cd-cadentradaproduto") || "[]");
             banco.push(cadentradaproduto)
             localStorage.setItem("cd-cadentradaproduto", JSON.stringify(banco));
+            localStorage.setItem("cd-estoques", JSON.stringify(dadosestoque));
             alert("Usuário salvo com sucesso");
             navigate('/entradaproduto');
         }
     }
+
+
+    function buscarprodutos(){
+    setProdutos (JSON.parse (localStorage.getItem ("cd-produtos") || "[]"));
+    }
+
 
     useEffect(()=>{
         buscarprodutos();
