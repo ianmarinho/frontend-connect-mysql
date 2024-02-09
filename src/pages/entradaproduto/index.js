@@ -24,7 +24,7 @@ export default function Entradaproduto() {
 
     function mostrarDados ()
     {
-        setBanco(JSON.parse(localStorage.getItem("cd-cadentradaproduto") || "[]"));
+        setBanco(JSON.parse(localStorage.getItem("cd-entradas") || "[]"));
     }
 
     function mostrarnome (idproduto){
