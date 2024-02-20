@@ -39,9 +39,9 @@ export default function Logon() {
             <section className="form">
                 <h1>Faça seu login</h1>
                 <form onSubmit={logar}>
-                    <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                    <input placeholder="Senha" type='password' value={senha} onChange={e => setSenha(e.target.value)} />
-                    <button type="submit">Entrar</button>
+                    <input  className='input1'  placeholder="Digite seu email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <input   className='input2'  placeholder="Digite sua senha" type='password' value={senha} onChange={e => setSenha(e.target.value)} />
+                    <button className='button1' type="submit">Entrar</button>
 
                 </form>
             </section>
