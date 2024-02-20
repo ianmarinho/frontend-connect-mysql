@@ -2,24 +2,24 @@ import './styles.css'
 
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
+import logoImage from '../../assets/img/logo1.jpg';
 
 
 export default function Logon() {
     const navigate = useNavigate();
     const [email, setEmail] = useState();
-    const [senha, setSenha] =useState ();
+    const [senha, setSenha] = useState();
 
     const logar = (e) => {
 
         e.preventDefault();
-        let banco =JSON.parse(localStorage.getItem("cd-usuarios") || "[]");
-        
+        let banco = JSON.parse(localStorage.getItem("cd-usuarios") || "[]");
+
         let dadosnovos = banco.filter(item => item.email === email && item.senha === senha);
         console.log(banco);
-        if(dadosnovos.length>0){
+        if (dadosnovos.length > 0) {
             navigate('/dashboard');
-        }else{
+        } else {
             alert("Dados incorretos!!!");
         }
 
@@ -32,19 +32,21 @@ export default function Logon() {
         <div className="logon-container">
 
             <div className='logo'>
-          
+                {/* Adicione a imagem acima dos inputs */}
+                <img src={logoImage} alt="Logo" className="logo-image" />
             </div>
 
             <section className="form">
                 <h1>Faça seu login</h1>
                 <form onSubmit={logar}>
-                    <input placeholder="Email" value={email}  onChange={e => setEmail(e.target.value)}/>
+                    <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
                     <input placeholder="Senha" type='password' value={senha} onChange={e => setSenha(e.target.value)} />
                     <button type="submit">Entrar</button>
-                  
+
                 </form>
             </section>
 
         </div>
     )
 }
+

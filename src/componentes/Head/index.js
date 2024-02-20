@@ -1,44 +1,47 @@
-import {FiLogOut} from 'react-icons/fi';
-import {FaReply} from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
+import { FaReply } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; //
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import './styles.css';
 
 
-export default function Head({title}){
- const navigate = useNavigate();
-   function retornar(){
-     navigate(-1);
+
+export default function Head({ title }) {
+   const navigate = useNavigate();
+
+   function retornar() {
+      navigate(-1);
    }
-   function sair(){
-      navigate("/");
+
+   function sair() {
+      navigate('/');
    }
-  const confirmarsaida=()=> {
+
+   const confirmarsaida = () => {
       confirmAlert({
-          message: "Deseja realmente sair?",
-          buttons: [
-         {
-             label: 'Sim',
-             onClick: () => {
-               sair();
-            }
-         },
-         {
-            label: 'Não',
-           // onClick: () => alert('Click No')
-          }
-          ]
+         message: 'Deseja realmente sair?',
+         buttons: [
+            {
+               label: 'Sim',
+               onClick: () => {
+                  sair();
+               },
+            },
+            {
+               label: 'Não',
+               // onClick: () => alert('Click No')
+            },
+         ],
       });
-   
-       };
+   };
 
+   return (
+      <div className="head">
 
-   return(
-    <div className="head">
-       <FaReply size={24} onClick={retornar} color='blue' />
-        <h2>{title}</h2>
-        <FiLogOut size={24} onClick={confirmarsaida} color='red' />
-    </div>
-   )    
+         <FaReply size={24} onClick={retornar} color="blue" />
+         <h2>{title}</h2>
+         <FiLogOut size={24} onClick={confirmarsaida} color="red" />
+      </div>
+   );
 }
