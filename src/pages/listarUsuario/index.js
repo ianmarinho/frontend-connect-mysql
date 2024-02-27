@@ -9,6 +9,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import {Link} from 'react-router-dom';
 import Head from '../../componentes/Head';
 import { useNavigate, link } from 'react-router-dom';
+import api from '../../server/api';
 
 
 
@@ -34,11 +35,29 @@ export default function Listausuario() {
 
     useEffect ( ()=>{
     mostrarDados ();
+    cep ()
     },[] )
+
+
+
+
+    function cep (){
+        const url = "viacep.com.br/ws/77809130/json/"
+
+        fetch (url)
+        .then (function (response) {
+        console.log (response.json () ) ;
+        })
+    }
 
     function mostrarDados ()
     {
-        setBanco(JSON.parse(localStorage.getItem("cd-usuarios") || "[]"));
+        // setBanco(JSON.parse(localStorage.getItem("cd-usuarios") || "[]")); //
+        api.get ('/usuario')
+        .then(res => {
+        console.log (res.data)
+        setBanco (res.data)
+        })
     }
 
     const  apagar = (id) => {
