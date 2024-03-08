@@ -53,11 +53,10 @@ export default function Cadastrousuario() {
                 )
 
          
-            //navigate('/listausuario');//
+            navigate('/listausuario');
 
         }
     }
-    /*dfasdfadfaasdf*/
 
 
 

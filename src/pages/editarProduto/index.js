@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import '../../pages/global.css';
 import Menu from '../../componentes/Menu';
 import { FiFilePlus } from "react-icons/fi";
@@ -7,6 +6,7 @@ import { MdCancel } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
 import { useNavigate, useParams } from 'react-router-dom';
 import Head from '../../componentes/Head';
+import api from '../../server/api';
 
 export default function Editarproduto() {
   let { id } = useParams();
@@ -15,71 +15,56 @@ export default function Editarproduto() {
   const [descricao, setDescricao] = useState("");
   const [estoque_minimo, setEstoque_minimo] = useState("");
   const [estoque_maximo, setEstoque_maximo] = useState("");
-  const [banco, setBanco] = useState([]);
-
-
-
-  const produto = {
-    id,
-    status,
-    descricao,
-    estoque_minimo,
-    estoque_maximo
-  }
 
   useEffect(() => {
-
     mostrardados(id);
+  }, [id]);
 
-
-
-  }, [])
   async function mostrardados(idu) {
-    let listaUser = JSON.parse(localStorage.getItem("cd-produtos"));
-
-    listaUser.
-      filter(value => value.id == idu).
-      map(value => {
-        setStatus(value.status);
-        setDescricao(value.descricao);
-        setEstoque_minimo(value.estoque_minimo);
-        setEstoque_maximo(value.estoque_maximo);
-
-
-      })
+    try {
+      const response = await api.get(`/produto/${idu}`);
+      if (response.status === 200) {
+        setStatus(response.data.produto[0].status);
+        setDescricao(response.data.produto[0].descricao);
+        setEstoque_minimo(response.data.produto[0].estoque_minimo);
+        setEstoque_maximo(response.data.produto[0].estoque_maximo);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
-
 
   function salvardados(e) {
     e.preventDefault();
 
-    let i = 0;
-    if (status == "")
-      i++;
-    else if (descricao == "")
-      i++;
-    else if (estoque_minimo == "")
-      i++;
-    else if (estoque_maximo == "")
-      i++;
-    if (i == 0) {
-      const banco = JSON.parse(localStorage.getItem("cd-produtos") || "[]");
-      let dadosnovos = banco.filter(item => item.id !== id);
-      console.log(dadosnovos);
-      dadosnovos.push(produto);
-      localStorage.setItem("cd-produtos", JSON.stringify(dadosnovos));
-      alert("Usuário salvo com sucesso");
-      navigate('/listaproduto');
-    } else {
-      alert("Verifique! Há campos vazios!")
+    if (!status || !descricao || !estoque_minimo || !estoque_maximo) {
+      alert("Verifique! Há campos vazios!");
+      return;
     }
+
+    const produto = {
+      id,
+      status,
+      descricao,
+      estoque_minimo,
+      estoque_maximo
+    };
+
+    api.put('/produto', produto, { headers: { "Content-Type": "application/json" } })
+      .then(function (response) {
+        console.log(response.data);
+        alert(response.data.mensagem);
+        navigate('/listaproduto');
+      })
+      .catch(function (error) {
+        console.error("Error updating data:", error);
+        alert("Erro ao salvar os dados");
+      });
   }
 
   return (
     <div className="dashboard-container">
-
       <div className='menu'>
-
         <Menu />
       </div>
       <div className='principal'>
@@ -104,29 +89,25 @@ export default function Editarproduto() {
               onChange={e => setEstoque_minimo(e.target.value)}
               placeholder='Digite o valor minimo'
             />
-
             <input
               type='number'
               value={estoque_maximo}
               onChange={e => setEstoque_maximo(e.target.value)}
               placeholder='Digite o valor máximo'
             />
-
             <div className='acao'>
-              <button className='btn-save'>
+              <button type="submit" className='btn-save'>
                 <FaSave />
                 Salvar
               </button>
-              <button className='btn-cancel'>
+              <button type="button" className='btn-cancel' onClick={() => navigate('/listaproduto')}>
                 <MdCancel />
-                Cancelar</button>
+                Cancelar
+              </button>
             </div>
           </form>
-
         </div>
       </div>
     </div>
-
-  )
-
+  );
 }

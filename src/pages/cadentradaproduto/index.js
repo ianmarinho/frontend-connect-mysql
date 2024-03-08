@@ -8,10 +8,6 @@ import { MdOutlineCancel, MdCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import Head from '../../componentes/Head';
 
-
-
-
-
 export default function Cadentradaproduto() {
     const navigate = useNavigate();
     const [idproduto, setIdproduto] = useState("");
