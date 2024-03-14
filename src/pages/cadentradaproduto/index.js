@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import '../../pages/global.css';
 import Menu from '../../componentes/Menu';
-import { RiSave3Fill  } from "react-icons/ri";
-import { FaSave   } from "react-icons/fa";
+import { RiSave3Fill } from "react-icons/ri";
+import { FaSave } from "react-icons/fa";
 import { MdOutlineCancel, MdCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import Head from '../../componentes/Head';
+import api from '../../server/api';
 
 export default function Cadentradaproduto() {
     const navigate = useNavigate();
@@ -75,13 +76,18 @@ export default function Cadentradaproduto() {
         else if (dataentrada == "")
             i++;
         if (i == 0) {
-            const banco = JSON.parse(localStorage.getItem("cd-entradas")|| "[]");
 
-            banco.push(cadentradaproduto);
-            localStorage.setItem("cd-entradas", JSON.stringify(banco));
-            alterarEstoque(idproduto, quantidade, valorunitario)
-            alert("Entrada salvo com sucesso");
-            navigate('/entradaproduto');
+            api.post('/entrada', cadentradaproduto,
+                { headers: { "Content-Type": "application/json" } })
+                .then(function (response) {
+                    console.log(response.data)
+                    alert(response.data.mensagem);
+                    navigate('/entradaproduto');
+                }
+
+                )
+
+
         } else {
             alert("Verifique! Há campos vazios!")
         }
@@ -89,7 +95,11 @@ export default function Cadentradaproduto() {
 
     function mostrarproduto() {
 
-        setProdutos(JSON.parse(localStorage.getItem("cd-produtos") || "[]"));
+        api.get('/produto',
+            { headers: { "Content-Type": "application/json" } })
+            .then(function (response) {
+                setProdutos(response.data.produto);
+            })
 
     }
     return (

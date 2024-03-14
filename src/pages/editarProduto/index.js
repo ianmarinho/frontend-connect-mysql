@@ -87,13 +87,13 @@ export default function Editarproduto() {
               type='number'
               value={estoque_minimo}
               onChange={e => setEstoque_minimo(e.target.value)}
-              placeholder='Digite o valor minimo'
+              placeholder='Digite o valor minimo de estoque'
             />
             <input
               type='number'
               value={estoque_maximo}
               onChange={e => setEstoque_maximo(e.target.value)}
-              placeholder='Digite o valor máximo'
+              placeholder='Digite o valor máximo de estoque'
             />
             <div className='acao'>
               <button type="submit" className='btn-save'>
