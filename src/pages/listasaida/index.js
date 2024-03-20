@@ -9,31 +9,54 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
 import Head from '../../componentes/Head';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import api from '../../server/api';
 
 export default function Listarsaida() {
     const [banco, setBanco] = useState([]);
 
     useEffect(() => {
-        mostrardados();
+        mostrarDados();
     }, []);
 
-    function mostrardados() {
-        setBanco(JSON.parse(localStorage.getItem("cd-saida") || "[]"));
+    function formatarData(data) {
+        return moment(data).format('DD/MM/YYYY');
+    }
+
+    function mostrarDados() {
+        // setBanco(JSON.parse(localStorage.getItem("cd-saida") || "[]"));
+        
+        api.get('/saida')
+            .then(res => {
+                console.log(res.data.saida)
+                setBanco(res.data.saida)
+            })
     }
 
     const apagar = (id) => {
         confirmAlert({
-            title: 'Excluir Usuário',
-            message: 'Deseja realmente excluir esse usuário?',
+            title: 'Excluir Saida',
+            message: 'Deseja realmente excluir essa saida?',
             buttons: [
                 {
                     label: 'Sim',
                     onClick: () => {
-                        let dadosnovos = banco.filter(item => item.id !== id);
-                        localStorage.setItem("cd-saida", JSON.stringify(dadosnovos));
-                        setBanco(dadosnovos); // Atualiza o estado com os dados filtrados
-                        alert(`Você apagou o usuário id:${id}`);
+                        // let dadosnovos = banco.filter(item => item.id !== id);
+                        // localStorage.setItem("cd-cadentradaproduto", JSON.stringify(dadosnovos));
+                        // setBanco(dadosnovos); // Atualiza o estado com os dados filtrados
+                        // alert(`Você apagou a entrada id:${id}`);
+
+                        api.delete(`/saida/${id}`)
+                            .then(res => {
+                                if (res.status == 200) {
+                                    alert(`Você apagou a saida id:${id}`);
+                                    mostrarDados();
+                                } else {
+                                    alert("houve um problema no servidor")
+                                }
+                            })
                     }
+
                 },
                 {
                     label: 'Não',
@@ -43,18 +66,18 @@ export default function Listarsaida() {
         });
     };
 
-    function mostrarnome(idproduto) {
-        let nome = "";
-        const Listarproduto = JSON.parse(localStorage.getItem("cd-produtos") || "[]");
+    // function mostrarnome(idproduto) {
+    //     let nome = "";
+    //     const Listarproduto = JSON.parse(localStorage.getItem("cd-produtos") || "[]");
 
-        Listarproduto
-            .filter(value => value.id == idproduto)
-            .map(value => {
-                nome = value.descricao;
-            });
+    //     Listarproduto
+    //         .filter(value => value.id == idproduto)
+    //         .map(value => {
+    //             nome = value.descricao;
+    //         });
 
-        return nome;
-    }
+    //     return nome;
+    // }
 
     return (
         <div className="dashboard-container">
@@ -78,25 +101,25 @@ export default function Listarsaida() {
                         </tr>
                     </thead>
                     <tbody>
+
                         {
-                            banco.map((usu) => (
-                                <tr key={usu.id}>
-                                    <td>{usu.id}</td>
-                                    <td>{(mostrarnome)(usu.id_produto)}</td>
-                                    <td>{usu.qtde}</td>
-                                    <td>{usu.valor_unitario}</td>
-                                    <td>{usu.data_saida}</td>
-                                    <td className='botoes'>
-                                        <FiTrash
-                                            size={18}
-                                            color='red'
-                                            cursor="pointer"
-                                            onClick={(e) => apagar(usu.id)}
-                                        />
-                                    </td>
-                                </tr>
-                            ))
+                            banco.map((said) => {
+
+                                return (
+                                    <tr key={said.toString()}>
+                                        <td> {said.id} </td>
+                                        <td> {said.descricao} </td>
+                                        <td> {said.quantidade} </td>
+                                        <td> {said.valor_unitario} </td>
+                                        <td>{formatarData(said.data)} </td>
+                                        <td className='botoes'> <FiTrash color='red' onClick={(e) => apagar(said.id)} />
+                                        </td>
+
+                                    </tr>
+                                )
+                            })
                         }
+
                     </tbody>
                 </table>
             </div>

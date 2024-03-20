@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
 import Head from '../../componentes/Head';
+import api from '../../server/api';
 
 export default function Listarestoque() {
     const [banco, setBanco] = useState([]);
@@ -17,8 +18,14 @@ export default function Listarestoque() {
     }, []);
 
     function mostrardados() {
-        const dadosLocalStorage = JSON.parse(localStorage.getItem("cd-estoques")) || [];
-        setBanco(dadosLocalStorage);
+        // const dadosLocalStorage = JSON.parse(localStorage.getItem("cd-estoques")) || [];
+        // setBanco(dadosLocalStorage);
+
+        api.get('/estoque')
+        .then(res => {
+            console.log(res.data.estoque)
+            setBanco(res.data.estoque)
+        })
        
     }
     
@@ -62,12 +69,12 @@ export default function Listarestoque() {
                     <tbody>
                         {
                        
-                        banco.map((usu) => (
-                            <tr key={usu.id}>
-                                <td>{usu.id}</td>
-                                <td>{(mostrarnome)(usu.idproduto)}</td>
-                                <td>{usu.quantidade}</td>
-                                <td>{usu.valorunitario}</td>
+                        banco.map((estoque) => (
+                            <tr key={estoque.id}>
+                               <td> {estoque.id} </td>
+                                    <td> {estoque.descricao} </td>
+                                    <td> {estoque.quantidade} </td>
+                                    <td> {estoque.valor_unitario} </td>
                                 
                             </tr>
                         ))

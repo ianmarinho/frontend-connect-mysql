@@ -13,6 +13,7 @@ export default function Cadastroproduto() {
     const [descricao, setDescricao] = useState("");
     const [estoque_minimo, setEstoque_minimo] = useState(0);
     const [estoque_maximo, setEstoque_maximo] = useState(10);
+   
 
     const produto = {
         id: Date.now().toString(10) + Math.floor(Math.random() * 100 + 50).toString(4),
@@ -21,6 +22,9 @@ export default function Cadastroproduto() {
         estoque_minimo,
         estoque_maximo
     }
+
+
+
 
     function salvardados(e) {
         e.preventDefault();
@@ -62,7 +66,12 @@ export default function Cadastroproduto() {
                 <Head title="Cadastro de Produto" />
                 <div className="form-container">
                     <form className='form-cadastro' onSubmit={salvardados}>
+
+                        
                         <input type="text" value={status} onChange={e => setStatus(e.target.value)} placeholder="Digite o status" />
+                    
+
+
                         <input type="text" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder="Digite a descrição" />
                         <input type="number" value={estoque_minimo} onChange={e => setEstoque_minimo(e.target.value)} />
                         <input type="number" value={estoque_maximo} onChange={e => setEstoque_maximo(e.target.value)} />

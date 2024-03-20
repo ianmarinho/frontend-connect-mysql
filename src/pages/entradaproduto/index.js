@@ -24,12 +24,13 @@ export default function Entradaproduto() {
         mostrarDados();
     }, [])
 
-    function formatarData (data) {
+    function formatarData(data) {
         return moment(data).format('DD/MM/YYYY');
     }
 
     function mostrarDados() {
         // setBanco(JSON.parse(localStorage.getItem("cd-entradas") || "[]"));
+
         api.get('/entrada')
             .then(res => {
                 console.log(res.data.entrada)
@@ -37,20 +38,20 @@ export default function Entradaproduto() {
             })
     }
 
-    function mostrarnome(idproduto) {
-        let nome = "";
-        const Listaproduto = JSON.parse(localStorage.getItem("cd-produtos") || "[]");
+    // function mostrarnome(idproduto) {
+    //     let nome = "";
+    //     const Listaproduto = JSON.parse(localStorage.getItem("cd-produtos") || "[]");
 
-        Listaproduto.
-            filter(value => value.id == idproduto).
-            map(value => {
+    //     Listaproduto.
+    //         filter(value => value.id == idproduto).
+    //         map(value => {
 
-                nome = value.descricao
-            })
+    //             nome = value.descricao
+    //         })
 
 
-        return nome;
-    }
+    //     return nome;
+    // }
 
     const apagar = (id) => {
         confirmAlert({
@@ -104,11 +105,10 @@ export default function Entradaproduto() {
                 <table >
                     <tr>
                         <th>Id</th>
-                        <th>Id Produto</th>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Valor Unitário</th>
-                        <th>Data de Entrada</th>
+                        <th>produto</th>
+                        <th>quantidade</th>
+                        <th>valor unitario</th>
+                        <th>data saida</th>
                         <th></th>
                         <th></th>
 
@@ -120,11 +120,10 @@ export default function Entradaproduto() {
                             return (
                                 <tr key={ent.toString()}>
                                     <td> {ent.id} </td>
-                                    <td> {ent.id_produto} </td>
                                     <td> {ent.descricao} </td>
                                     <td> {ent.quantidade} </td>
                                     <td> {ent.valor_unitario} </td>
-                                    <td>{ formatarData (ent.data)} </td>
+                                    <td>{formatarData(ent.data)} </td>
                                     <td className='botoes'> <FiTrash color='red' onClick={(e) => apagar(ent.id)} />
                                     </td>
 

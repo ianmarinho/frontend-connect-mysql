@@ -56,7 +56,7 @@ export default function Cadentradaproduto() {
         }
 
         // Atualizar o localStorage com os novos dados do estoque
-        localStorage.setItem("cd-estoques", JSON.stringify(estoque));
+        // localStorage.setItem("cd-estoques", JSON.stringify(estoque));
     }
 
     useEffect(() => {
@@ -119,6 +119,7 @@ export default function Cadentradaproduto() {
                             onChange={e => setIdproduto(e.target.value)}
                             placeholder='Digite o id do produto'
                         />
+                        
                         <select value={idproduto} onChange={e => setIdproduto(e.target.value)}  >
                             <option>Selecione um produto</option>
                             {
@@ -128,7 +129,9 @@ export default function Cadentradaproduto() {
                                     )
                                 })
                             }
+
                         </select>
+
                         <input
                             type='number'
                             value={quantidade}
