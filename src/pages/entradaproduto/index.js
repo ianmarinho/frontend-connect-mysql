@@ -108,7 +108,7 @@ export default function Entradaproduto() {
                         <th>produto</th>
                         <th>quantidade</th>
                         <th>valor unitario</th>
-                        <th>data saida</th>
+                        <th>data entrada</th>
                         <th></th>
                         <th></th>
 
@@ -119,12 +119,12 @@ export default function Entradaproduto() {
 
                             return (
                                 <tr key={ent.toString()}>
-                                    <td> {ent.id} </td>
+                                    <td> {ent.id_} </td>
                                     <td> {ent.descricao} </td>
                                     <td> {ent.quantidade} </td>
                                     <td> {ent.valor_unitario} </td>
-                                    <td>{formatarData(ent.data)} </td>
-                                    <td className='botoes'> <FiTrash color='red' onClick={(e) => apagar(ent.id)} />
+                                    <td>{formatarData(ent.data_entrada)} </td>
+                                    <td className='botoes'> <FiTrash color='red' onClick={(e) => apagar(ent.id_)} />
                                     </td>
 
                                 </tr>

@@ -12,6 +12,8 @@ import api from '../../server/api';
 export default function Cadentradaproduto() {
     const navigate = useNavigate();
     const [idproduto, setIdproduto] = useState("");
+    const [maximo, setMaximo] = useState(0);
+    const [estoquemaximo, setEstoquemaximo] = useState(0);
     const [quantidade, setQuantidade] = useState("");
     const [valorunitario, setValorUnitario] = useState("");
     const [dataentrada, setDataentrada] = useState("");
@@ -99,9 +101,11 @@ export default function Cadentradaproduto() {
             { headers: { "Content-Type": "application/json" } })
             .then(function (response) {
                 setProdutos(response.data.produto);
+                console.log(produtos)
             })
 
     }
+
     return (
         <div className="dashboard-container">
 
@@ -119,18 +123,17 @@ export default function Cadentradaproduto() {
                             onChange={e => setIdproduto(e.target.value)}
                             placeholder='Digite o id do produto'
                         />
+                   
                         
-                        <select value={idproduto} onChange={e => setIdproduto(e.target.value)}  >
-                            <option>Selecione um produto</option>
-                            {
-                                produtos.map((linha) => {
-                                    return (
-                                        <option value={linha.id}>{linha.descricao}</option>
-                                    )
-                                })
-                            }
+                        <select value={idproduto} onChange={e => setIdproduto(e.target.value)}>
+                        <option>Selecione um produto</option>
+                        {produtos.map((linha) => (
+                            <option key={linha.id_} value={linha.id_}>
+                                {linha.descricao}
+                            </option>
+                        ))}
+                    </select>
 
-                        </select>
 
                         <input
                             type='number'

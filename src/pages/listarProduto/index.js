@@ -114,7 +114,7 @@ export default function Listaproduto() {
 
                             return (
                                 <tr key={pro.toString()}>
-                                    <td> {pro.id} </td>
+                                    <td> {pro.id_} </td>
                                     <td> {pro.status} </td>
                                     <td> {pro.descricao} </td>
                                     <td> {pro.estoque_minimo} </td>

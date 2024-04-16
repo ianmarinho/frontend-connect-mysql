@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../pages/global.css';
 import Menu from '../../componentes/Menu';
-import { FiTrash } from "react-icons/fi"; // Imported FiTrash for delete button
-import { MdCancel } from 'react-icons/md'; // Imported MdCancel for cancel button
-import { RiSave3Fill } from 'react-icons/ri'; // Imported RiSave3Fill for save button
+import { FiTrash } from "react-icons/fi";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
@@ -12,8 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import api from '../../server/api';
 
-export default function Listarsaida() {
+export default function Saidaproduto() {
     const [banco, setBanco] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         mostrarDados();
@@ -24,39 +23,36 @@ export default function Listarsaida() {
     }
 
     function mostrarDados() {
-        // setBanco(JSON.parse(localStorage.getItem("cd-saida") || "[]"));
-        
         api.get('/saida')
             .then(res => {
-                console.log(res.data.saida)
-                setBanco(res.data.saida)
+                setBanco(res.data.saida);
             })
+            .catch(error => {
+                console.error("Erro ao obter dados de saída:", error);
+            });
     }
 
     const apagar = (id) => {
         confirmAlert({
-            title: 'Excluir Saida',
-            message: 'Deseja realmente excluir essa saida?',
+            title: 'Excluir Saída',
+            message: 'Deseja realmente excluir essa saída?',
             buttons: [
                 {
                     label: 'Sim',
                     onClick: () => {
-                        // let dadosnovos = banco.filter(item => item.id !== id);
-                        // localStorage.setItem("cd-cadentradaproduto", JSON.stringify(dadosnovos));
-                        // setBanco(dadosnovos); // Atualiza o estado com os dados filtrados
-                        // alert(`Você apagou a entrada id:${id}`);
-
                         api.delete(`/saida/${id}`)
                             .then(res => {
-                                if (res.status == 200) {
-                                    alert(`Você apagou a saida id:${id}`);
+                                if (res.status === 200) {
+                                    alert(`Você apagou a saída id:${id}`);
                                     mostrarDados();
                                 } else {
-                                    alert("houve um problema no servidor")
+                                    alert("Houve um problema no servidor");
                                 }
                             })
+                            .catch(error => {
+                                console.error("Erro ao excluir saída:", error);
+                            });
                     }
-
                 },
                 {
                     label: 'Não',
@@ -66,60 +62,40 @@ export default function Listarsaida() {
         });
     };
 
-    // function mostrarnome(idproduto) {
-    //     let nome = "";
-    //     const Listarproduto = JSON.parse(localStorage.getItem("cd-produtos") || "[]");
-
-    //     Listarproduto
-    //         .filter(value => value.id == idproduto)
-    //         .map(value => {
-    //             nome = value.descricao;
-    //         });
-
-    //     return nome;
-    // }
-
     return (
         <div className="dashboard-container">
             <div className='menu'>
                 <h1>Menu</h1>
                 <Menu />
             </div>
+
             <div className='principal'>
-                <h1>Lista de Saida</h1>
+                <Head title="Saída de Produto" />
                 <Link to="/cadastrosaida" className='btn-novo'>Novo Cadastro</Link>
+
                 <table>
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>produto</th>
-                            <th>quantidade</th>
-                            <th>valor unitario</th>
-                            <th>data saida</th>
-                            <th></th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Valor Unitário</th>
+                            <th>Data Saída</th>
                             <th></th>
                         </tr>
                     </thead>
+
                     <tbody>
-
-                        {
-                            banco.map((said) => {
-
-                                return (
-                                    <tr key={said.toString()}>
-                                        <td> {said.id} </td>
-                                        <td> {said.descricao} </td>
-                                        <td> {said.quantidade} </td>
-                                        <td> {said.valor_unitario} </td>
-                                        <td>{formatarData(said.data)} </td>
-                                        <td className='botoes'> <FiTrash color='red' onClick={(e) => apagar(said.id)} />
-                                        </td>
-
-                                    </tr>
-                                )
-                            })
-                        }
-
+                        {banco.map((saida) => (
+                            <tr key={saida.id_}>
+                                <td>{saida.id_}</td>
+                                <td>{saida.descricao}</td>
+                                <td>{saida.quantidade}</td>
+                                <td>{saida.valor_unitario}</td>
+                                <td>{formatarData(saida.data_saida)}</td>
+                                <td className='botoes'><FiTrash color='red' onClick={() => apagar(saida.id_)} /></td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
