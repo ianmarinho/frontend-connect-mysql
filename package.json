@@ -16,8 +16,13 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  
+  "engines": {
+    "node": "20.x"
+  },
+
   "scripts": {
-    "start": "react-scripts start",
+    "start": "index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
