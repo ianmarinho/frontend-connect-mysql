@@ -34,29 +34,31 @@ export default function Editarusuario() {
   }, [])
 
 
-  async function mostrardados(idu) {
-    // let listaUser = JSON.parse(localStorage.getItem("cd-usuarios"));
-
-    // listaUser.
-    //   filter(value => value.id == idu).
-    //   map(value => {
-    //     setNome(value.nome);
-    //     setEmail(value.email);
-    //     setSenha(value.senha);
-
-
-    //   })
-
-    api.get(`/usuario/ ${idu}`)
+  function mostrardados(idu) {
+    api.get(`/usuario/${idu}`)
       .then(res => {
-        if (res.status === 200) {
-          setNome(res.data.usuario[0].nome);
-          setEmail(res.data.usuario[0].email);
-          setSenha(res.data.usuario[0].senha);
+        if (res.status === 200 && res.data.usuario && res.data.usuario.length > 0) {
+          const usuario = res.data.usuario[0];
+          if (usuario.nome) {
+            setNome(usuario.nome);
+          }
+          if (usuario.email) {
+            setEmail(usuario.email);
+          }
+          if (usuario.senha) {
+            setSenha(usuario.senha);
+          }
+        } else {
+          // Tratar o caso em que nenhum usuário é retornado pela API
+          console.log('Nenhum usuário encontrado');
         }
       })
-
+      .catch(error => {
+        // Tratar erros de requisição para a API
+        console.error('Erro ao buscar dados do usuário:', error);
+      });
   }
+
 
 
   function salvardados(e) {

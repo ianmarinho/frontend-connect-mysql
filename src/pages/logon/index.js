@@ -6,6 +6,7 @@ import logoImage from '../../assets/img/logo1.jpg';
 import api from '../../server/api';
 
 
+
 export default function Logon() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -23,8 +24,8 @@ export default function Logon() {
         // let dadosnovos = banco.filter(item => item.email === email && item.senha === senha);
 
         api.post("/usuario/login", log)
-            .then( res => {
-                
+            .then(res => {
+
                 if (res.status == 200) {
                     alert(res.data.mensagem)
                     navigate('/dashboard');
@@ -57,10 +58,11 @@ export default function Logon() {
                     <input className='input2' placeholder="Digite sua senha" type='password' value={senha} onChange={e => setSenha(e.target.value)} />
                     <button className='button1' type="submit">Entrar</button>
                     <a className='novo' href="/cadastrousuario">Novo Cadastro</a>
-                    
-
                 </form>
             </section>
+
+
+       
 
         </div>
     )

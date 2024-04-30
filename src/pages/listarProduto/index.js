@@ -120,10 +120,10 @@ export default function Listaproduto() {
                                     <td> {pro.estoque_minimo} </td>
                                     <td> {pro.estoque_maximo} </td>
                                     <td className='botoes'>
-                                        <Link to={`/editarproduto/${pro.id}`} ><FiEdit color='blue' />
+                                        <Link to={`/editarproduto/${pro.id_}`} ><FiEdit color='blue' />
                                         </Link>
                                     </td>
-                                    <td className='botoes'> <FiTrash color='red' onClick={(e) => apagar(pro.id)} />
+                                    <td className='botoes'> <FiTrash color='red' onClick={(e) => apagar(pro.id_)} />
                                     </td>
 
                                 </tr>

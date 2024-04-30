@@ -20,19 +20,21 @@ export default function Editarproduto() {
     mostrardados(id);
   }, [id]);
 
-  async function mostrardados(idu) {
-    try {
-      const response = await api.get(`/produto/${idu}`);
-      if (response.status === 200) {
-        setStatus(response.data.produto[0].status);
-        setDescricao(response.data.produto[0].descricao);
-        setEstoque_minimo(response.data.produto[0].estoque_minimo);
-        setEstoque_maximo(response.data.produto[0].estoque_maximo);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  function mostrardados(idu) {
+    api.get(`/produto/${idu}`)
+      .then(response => {
+        if (response.status === 200) {
+          setStatus(response.data.produto[0].status);
+          setDescricao(response.data.produto[0].descricao);
+          setEstoque_minimo(response.data.produto[0].estoque_minimo);
+          setEstoque_maximo(response.data.produto[0].estoque_maximo);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
   }
+
 
   function salvardados(e) {
     e.preventDefault();
